@@ -18,3 +18,7 @@ gem 'rubocop-rspec'
 # many of the guidelines outlined in the community Ruby Style Guide.
 # https://github.com/bbatsov/ruby-style-guide
 gem 'rubocop', require: false
+
+# The most popular HTML, CSS, and JavaScript framework for developing responsive,
+# mobile first projects on the web. http://getbootstrap.com
+gem 'bootstrap', '~> 4.0.0.alpha6'
