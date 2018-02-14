@@ -1,3 +1,10 @@
+require 'sinatra/activerecord/rake'
+$LOAD_PATH << File.dirname(__FILE__)
+require './app'
+
+task :load_config do
+end
+
 namespace :testcode do
   require 'rspec/core/rake_task'
   require 'rubocop/rake_task'

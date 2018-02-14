@@ -1,6 +1,11 @@
 require 'sinatra'
+require 'sinatra/activerecord'
+require 'lib/model/user'
 
+# Main class running the application and handling DSL routing.
 class RunIt < Sinatra::Application
+  register Sinatra::ActiveRecordExtension
+
   configure do
     set :public_folder, File.expand_path('../public', __FILE__)
     set :views, File.expand_path('../views', __FILE__)
@@ -8,7 +13,6 @@ class RunIt < Sinatra::Application
   end
 
   get '/' do
-    'Hello world'
   end
 
   get '/home' do

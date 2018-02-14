@@ -1,0 +1,8 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: runit
+  username: root
+  password: admin
+  host: localhost
+  port: 3306

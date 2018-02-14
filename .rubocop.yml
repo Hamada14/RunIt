@@ -6,3 +6,6 @@ Metrics/LineLength:
   URISchemes:
   - http
   - https
+
+Rails/ApplicationRecord:
+  Enabled: false
