@@ -10,7 +10,7 @@ namespace :testcode do
   desc 'Execute rubocop -DR'
   RuboCop::RakeTask.new(:rubocop) do |task|
     task.requires << 'rubocop-rspec'
-    task.options = ['-DR']
+    task.options = ['-DR', 'pattern', '**/*.rb']
   end
 end
 
