@@ -8,7 +8,7 @@ class RunIt < Sinatra::Application
   end
 
   get '/' do
-    "Hello world"
+    'Hello world'
   end
 
   get '/home' do
@@ -19,4 +19,7 @@ class RunIt < Sinatra::Application
     erb :sign_in, layout: false
   end
 
+  get '/register' do
+    erb :register, layout: false
+  end
 end
