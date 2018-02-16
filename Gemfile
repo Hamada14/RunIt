@@ -32,3 +32,7 @@ gem 'rake'
 
 # A simple, fast Mysql library for Ruby, binding to libmysql.
 gem 'mysql2', '~> 0.4.10'
+
+# bcrypt() is a sophisticated and secure hash algorithm designed by The OpenBSD project for
+# hashing passwords.
+gem 'bcrypt', '~> 3.1'

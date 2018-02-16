@@ -16,6 +16,7 @@ GEM
     ast (2.4.0)
     autoprefixer-rails (8.0.0)
       execjs
+    bcrypt (3.1.11)
     bootstrap (4.0.0)
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
@@ -88,6 +89,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1)
   bootstrap (~> 4.0.0.alpha6)
   mysql2 (~> 0.4.10)
   rake

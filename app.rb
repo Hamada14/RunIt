@@ -1,6 +1,8 @@
+require 'bcrypt'
+require 'lib/model/user'
+require 'lib/user_registeration'
 require 'sinatra'
 require 'sinatra/activerecord'
-require 'lib/model/user'
 
 # Main class running the application and handling DSL routing.
 class RunIt < Sinatra::Application
@@ -24,6 +26,28 @@ class RunIt < Sinatra::Application
   end
 
   get '/register' do
-    erb :register, layout: false
+    erb :register,
+        layout: false,
+        locals:
+          {
+            error: nil
+          }
+  end
+
+  post '/register' do
+    error = user_registration.register(params)
+    redirect '/sign-in' unless error
+    erb :register,
+        layout: false,
+        locals:
+          {
+            error: error
+          }
+  end
+
+  private
+
+  def user_registration
+    @user_registration ||= UserRegistration.new(Model::User, BCrypt::Password)
   end
 end
