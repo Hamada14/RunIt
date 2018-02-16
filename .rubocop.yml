@@ -7,5 +7,21 @@ Metrics/LineLength:
   - http
   - https
 
+Metrics/BlockLength:
+  Exclude:
+    - rubocop-rspec.gemspec
+    - Rakefile
+    - '**/*.rake'
+    - spec/**/*.rb
+
+
+Rspec/ExampleLength:
+  Exclude:
+    - spec/**/*.rb
+
+Rspec/MultipleExpectations:
+  Exclude:
+    - spec/**/*.rb
+
 Rails/ApplicationRecord:
   Enabled: false

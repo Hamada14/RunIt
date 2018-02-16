@@ -1,5 +1,5 @@
 require 'uri'
-require ''
+
 # Class responsible for validation and registration of new users.
 class UserRegistration
   attr_accessor :user_model, :password_encryptor
