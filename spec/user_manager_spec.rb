@@ -1,11 +1,11 @@
-require './lib/user_registeration'
+require './lib/user_manager'
 require './lib/model/user'
 require 'bcrypt'
 
-describe UserRegistration do
-  subject { user_registeration }
+describe UserManager do
+  subject { user_manager }
 
-  let(:user_registration) { described_class.new(user_model, password_encryptor) }
+  let(:user_manager) { described_class.new(user_model, password_encryptor) }
   let(:user_model) do
     user_model = class_double(Model::User)
     allow(user_model).to receive(:create)
@@ -44,7 +44,7 @@ describe UserRegistration do
       end
 
       it 'returns an already used email error' do
-        expect(user_registration
+        expect(user_manager
           .register(
             email: valid_email,
             password: valid_password,
@@ -54,7 +54,7 @@ describe UserRegistration do
       end
 
       it 'does not use the database' do
-        user_registration
+        user_manager
           .register(
             email: valid_email,
             password: valid_password,
@@ -67,7 +67,7 @@ describe UserRegistration do
 
     context 'when an invalid email is used' do
       it 'returns an invald email error' do
-        expect(user_registration
+        expect(user_manager
           .register(
             email: invalid_email,
             password: valid_password,
@@ -85,7 +85,7 @@ describe UserRegistration do
       end
 
       it 'returns an invald password error' do
-        expect(user_registration
+        expect(user_manager
           .register(
             email: valid_email,
             password: invalid_password,
@@ -102,7 +102,7 @@ describe UserRegistration do
       end
 
       it 'returns an invald password error' do
-        expect(user_registration
+        expect(user_manager
           .register(
             email: valid_email,
             password: valid_password,
@@ -120,7 +120,7 @@ describe UserRegistration do
     end
 
     it 'returns an invald password error' do
-      expect(user_registration
+      expect(user_manager
         .register(
           email: valid_email,
           password: valid_password,

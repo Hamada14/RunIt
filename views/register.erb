@@ -8,8 +8,8 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/form.css"/>
-  <link rel="stylesheet" href="css/register.css"/>
+  <link rel="stylesheet" href="css/form.css" />
+  <link rel="stylesheet" href="css/register.css" />
 
   <title>Register</title>
 </head>
@@ -19,7 +19,7 @@
     <div class="text-center mb-4">
       <img class="mb-4" src="images/brand.png" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">RunIt</h1>
-  </div>
+    </div>
 
     <div class="form-label-group">
       <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required="" autofocus="">
@@ -36,13 +36,18 @@
       <label for="inputConfirmPassword">Confirm Password</label>
     </div>
 
+    <div class="checkbox mb-3">
+      <a href="/login">Already have an account!</a>
+    </div>
+
     <% if error %>
       <div class="alert alert-danger" role="alert">
         <%= error %>
       </div>
     <% end %>
 
-    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register">
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
     <p class="mt-5 mb-3 text-muted text-center">RunIt © 2017-2018</p>
   </form>
 
