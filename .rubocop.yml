@@ -14,7 +14,9 @@ Metrics/BlockLength:
     - '**/*.rake'
     - spec/**/*.rb
 
-
+RSpec/NestedGroups:
+  Enabled: false
+  
 Rspec/ExampleLength:
   Exclude:
     - spec/**/*.rb

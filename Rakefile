@@ -11,7 +11,7 @@ namespace :testcode do
 
   desc 'Execute Rspec'
   RSpec::Core::RakeTask.new(:spec) do |task|
-    task.rspec_opts = '--format p'
+    task.rspec_opts = '--format p --require spec_helper'
   end
 
   desc 'Execute rubocop -DR'
