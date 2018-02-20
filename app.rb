@@ -3,6 +3,7 @@ require 'lib/model/user'
 require 'lib/user_manager'
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'securerandom'
 
 # Main class running the application and handling DSL routing.
 class RunIt < Sinatra::Application
@@ -13,6 +14,7 @@ class RunIt < Sinatra::Application
     set :views, File.expand_path('../views', __FILE__)
     set :root, File.dirname(__FILE__)
     enable :sessions
+    set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
   end
 
   THIRTY_DAYS_TO_SECONDS = 2_592_000
