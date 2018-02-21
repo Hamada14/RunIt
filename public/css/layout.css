@@ -1,0 +1,15 @@
+#main-toolbar {
+  background-color: #343635 !important;
+}
+
+.header, .sign-out, .sub-title {
+  color: #7eaba4 !important;
+}
+
+.header {
+  font-size: 30px !important;
+}
+
+body {
+  background-color: #dfdfdf;
+}
