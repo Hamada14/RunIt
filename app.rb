@@ -1,9 +1,10 @@
 require 'bcrypt'
-require 'lib/model/user'
-require 'lib/user_manager'
+require 'model/user'
+require 'securerandom'
 require 'sinatra'
 require 'sinatra/activerecord'
-require 'securerandom'
+require 'user/registration_validator'
+require 'user/user_manager'
 
 # Main class running the application and handling DSL routing.
 class RunIt < Sinatra::Application
@@ -72,13 +73,13 @@ class RunIt < Sinatra::Application
 
   post '/register' do
     redirect '/' if login?
-    error = user_manager.register(params)
-    redirect '/login' unless error
+    errors = user_manager.register(params)
+    redirect '/login' unless errors.empty?
     erb :register,
         layout: false,
         locals:
           {
-            error: error
+            errors: errors
           }
   end
 
@@ -91,6 +92,10 @@ class RunIt < Sinatra::Application
   end
 
   def user_manager
-    @user_manager ||= UserManager.new(Model::User, BCrypt::Password)
+    @user_manager ||= User::UserManager.new(Model::User, BCrypt::Password, registration_validator)
+  end
+
+  def registration_validator
+    @registration_validator ||= User::RegistrationValidator.new(Model::User)
   end
 end

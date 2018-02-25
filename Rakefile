@@ -1,5 +1,6 @@
 require 'sinatra/activerecord/rake'
 $LOAD_PATH << File.dirname(__FILE__)
+$LOAD_PATH << File.dirname(__FILE__) + '/lib'
 require './app'
 
 task :load_config do
