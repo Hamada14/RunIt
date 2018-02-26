@@ -27,16 +27,22 @@
       <label for="firstName">First Name</label>
     </div>
 
+    <%= print_error(errors, 'firstName') %>
+
     <div class="form-label-group">
       <input id="inputLastName" name="lastName" class="form-control" placeholder="Last Name"
         pattern="[a-zA-Z]{5,20}" required title="5 to 20 characters with no spaces">
       <label for="lastName">Last Name</label>
     </div>
 
+    <%= print_error(errors, 'lastName') %>
+
     <div class="form-label-group">
       <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required>
       <label for="email">Email address</label>
     </div>
+
+    <%= print_error(errors, 'email') %>
 
     <div class="form-label-group">
       <input type="password" id="password" name="password" class="form-control" placeholder="Password"
@@ -44,22 +50,19 @@
       <label for="Password">Password</label>
     </div>
 
+    <%= print_error(errors, 'password') %>
+
     <div class="form-label-group">
       <input type="password" id="confirmPassword" name="passwordConfirmation" class="form-control" placeholder="Confirm Password"
         pattern=".{7,21}" required title="7 to 21 characters">
       <label for="confirmPassword">Confirm Password</label>
     </div>
 
+    <%= print_error(errors, 'passwordConfirmation') %>
+
     <div class="checkbox mb-3">
       <a href="/login">Already have an account!</a>
     </div>
-
-    <% if error %>
-      <div class="alert alert-danger" role="alert">
-        <%= error %>
-      </div>
-    <% end %>
-
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
     <p class="mt-5 mb-3 text-muted text-center">RunIt © 2017-2018</p>

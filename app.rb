@@ -5,7 +5,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'user/registration_validator'
 require 'user/user_manager'
-
+require 'user/error_helpers'
 # Main class running the application and handling DSL routing.
 class RunIt < Sinatra::Application
   register Sinatra::ActiveRecordExtension
@@ -67,7 +67,7 @@ class RunIt < Sinatra::Application
         layout: false,
         locals:
           {
-            error: nil
+            errors: nil
           }
   end
 
