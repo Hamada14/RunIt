@@ -110,10 +110,10 @@ module User # rubocop:disable Metrics/ModuleLength
 
           let(:expected_registeration_params) do
             {
-              firstName: first_name,
-              lastName: last_name,
+              email: valid_email,
               password: expected_hashed_password,
-              email: valid_email
+              first_name: first_name,
+              last_name: last_name
             }
           end
 

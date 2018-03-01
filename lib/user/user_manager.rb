@@ -20,8 +20,8 @@ module User
       user_model.create(
         email: params[:email],
         password: password_hash,
-        firstName: params[:firstName],
-        lastName: params[:lastName]
+        first_name: params[:firstName],
+        last_name: params[:lastName]
       )
       {}
     end
