@@ -36,3 +36,8 @@ gem 'mysql2', '~> 0.4.10'
 # bcrypt() is a sophisticated and secure hash algorithm designed by The OpenBSD project for
 # hashing passwords.
 gem 'bcrypt', '~> 3.1'
+
+# This is an automatic reloading version of the rackup command that's shipped with Rack. It can be
+# used as an alternative to the complex reloading logic provided by web frameworks or in
+# environments that don't support application reloading.
+gem 'shotgun'

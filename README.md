@@ -4,3 +4,7 @@ RunIt is an event-driven, serverless computing platform. It is a compute service
 ## Running the Application:
 Currently running the application is only using `rackup -p #{PORT}`, remember to use the required port.
 To access the server use https://0.0.0.0:3000
+
+In case of running the application in development mode, to avoid the need of restarting the server to reload changes `Shotgun` was added.
+Launch the server using `bundle exec shotgun config.ru`
+
