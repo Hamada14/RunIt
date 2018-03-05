@@ -13,3 +13,7 @@
 body {
   background-color: #dfdfdf;
 }
+
+.sidebar {
+  background-color: #8585ad !important;
+}

@@ -26,8 +26,17 @@ class RunIt < Sinatra::Application
     erb :index,
         locals:
           {
-            user: session[:email]
+            first_name: session[:first_name]
           }
+  end
+
+  get '/lambdas' do
+    redirect '/login' unless login?
+
+    erb :lambdas,
+        locals:
+        {
+        }
   end
 
   get '/login' do
@@ -45,6 +54,7 @@ class RunIt < Sinatra::Application
     error = user_manager.login(params)
     if error.nil?
       session[:email] = params[:email]
+      session[:first_name] = Model::User.find_by(email: params[:email])[:first_name]
       session.options[:expire_after] = THIRTY_DAYS_TO_SECONDS unless params['remember_me'].nil?
       redirect '/'
     else
@@ -75,7 +85,11 @@ class RunIt < Sinatra::Application
   post '/register' do
     redirect '/' if login?
     errors = user_manager.register(params)
-    redirect '/login' unless errors.empty?
+    if errors.empty?
+      session[:email] = params[:email]
+      session[:firstName] = params[:first_name]
+      redirect '/'
+    end
     erb :register,
         layout: false,
         locals:
