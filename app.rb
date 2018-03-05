@@ -36,6 +36,7 @@ class RunIt < Sinatra::Application
     erb :lambdas,
         locals:
         {
+          first_name: session[:first_name]
         }
   end
 
