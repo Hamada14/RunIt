@@ -1,19 +1,31 @@
-
 <link rel="stylesheet" href="css/lambda.css" />
 
 <div class="container-fluid">
   <div class="row">
     <div class="col-4">
+      <table class="table round-form">
+        <thead class="thead-dark">
+          <tr>
+            <th>Lambda Name</th>
+            <th>Last Triggered</th>
+            <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% lambdas.each do |lambda| %>
+            <%= lambda_to_html_row(lambda) %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
 
     <div class="col-6">
 
-      <form class="lambda-create-form" action='/create_lambda' method='post'>
+      <form class="round-form" action='/create_lambda' method='post'>
         <div class="col-5">
           <div class="form-group">
             <label for="lambdaName">Lambda Name</label>
-            <input type="" class="form-control" name="lambdaName" placeholder="Enter lambda name"
-              pattern="[a-zA-Z][a-zA-Z0-9]{7,20}" required title="8 to 21 alphanumeric name starting with a letter">
+            <input type="" class="form-control" name="lambdaName" placeholder="Enter lambda name" pattern="[a-zA-Z][a-zA-Z0-9]{7,20}" required title="8 to 21 alphanumeric name starting with a letter">
           </div>
         </div>
 

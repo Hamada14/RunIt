@@ -1,6 +1,6 @@
-.lambda-create-form {
+.round-form {
   background-color: #FFFFFF;
-  border-radius: 25px;
-  border: 1px solid #000000;
+  border-radius: 5px;
+  border: 0.5px solid #000000;
   padding: 20px;
 }

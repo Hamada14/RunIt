@@ -1,11 +1,14 @@
 require 'bcrypt'
+require 'lambda/helpers'
+require 'lambda/lambda_manager'
+require 'model/lambda'
 require 'model/user'
 require 'securerandom'
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'user/error_helpers'
 require 'user/registration_validator'
 require 'user/user_manager'
-require 'user/error_helpers'
 
 # Main class running the application and handling DSL routing.
 class RunIt < Sinatra::Application
@@ -36,7 +39,8 @@ class RunIt < Sinatra::Application
     erb :lambdas,
         locals:
         {
-          first_name: session[:first_name]
+          first_name: session[:first_name],
+          lambdas: lambda_manager.get_lambdas(session[:email])
         }
   end
 
@@ -113,5 +117,9 @@ class RunIt < Sinatra::Application
 
   def registration_validator
     @registration_validator ||= User::RegistrationValidator.new(Model::User)
+  end
+
+  def lambda_manager
+    @lambda_manager ||= Lambda::LambdaManager.new(Model::Lambda)
   end
 end
