@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Migration file for creating the User table.
 class CreateUsers < ActiveRecord::Migration[5.1]
   def up

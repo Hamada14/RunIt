@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Migration class for Lambdas table.
 class CreateLambdas < ActiveRecord::Migration[5.1]
   def up

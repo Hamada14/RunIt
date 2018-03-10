@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bcrypt'
 require 'lambda/helpers'
 require 'lambda/lambda_manager'
@@ -12,7 +14,7 @@ require 'user/user_manager'
 require 'lambda/creation_validator'
 
 # Main class running the application and handling DSL routing.
-class RunIt < Sinatra::Application
+class RunIt < Sinatra::Application # rubocop:disable Metrics/ClassLength
   register Sinatra::ActiveRecordExtension
 
   configure do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'user/user_manager'
 require 'model/user'
 require 'bcrypt'

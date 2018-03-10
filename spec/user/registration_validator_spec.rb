@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'user/registration_validator'
 require 'model/user'
 

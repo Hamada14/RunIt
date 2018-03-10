@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'uri'
 
 module User
@@ -5,7 +7,7 @@ module User
   class UserManager
     attr_accessor :user_model, :password_encryptor, :registration_validator
 
-    INVALID_LOGIN_ERROR = 'The provided credentials are invalid'.freeze
+    INVALID_LOGIN_ERROR = 'The provided credentials are invalid'
 
     def initialize(user_model, password_encryptor, registration_validator)
       @user_model = user_model

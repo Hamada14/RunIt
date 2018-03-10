@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module User
   # Responsible for the validation of registration.
   class RegistrationValidator
     attr_accessor :user_model
 
-    INVALID_EMAIL_ERROR = 'Email is invalid.'.freeze
-    EMAIL_IN_USE_ERROR = 'Email is already in use.'.freeze
-    INVALID_PASSWORD_ERROR = 'Password must be alphanumeric of minimum length 7 characters.'.freeze
-    PASSWORD_MISMATCH_ERROR = "Password and confirmation don't match".freeze
-    INVALID_NAME_ERROR = 'Name must be between 5 and 20 characters with no space.'.freeze
+    INVALID_EMAIL_ERROR = 'Email is invalid.'
+    EMAIL_IN_USE_ERROR = 'Email is already in use.'
+    INVALID_PASSWORD_ERROR = 'Password must be alphanumeric of minimum length 7 characters.'
+    PASSWORD_MISMATCH_ERROR = "Password and confirmation don't match"
+    INVALID_NAME_ERROR = 'Name must be between 5 and 20 characters with no space.'
 
     def initialize(user_model)
       @user_model = user_model
@@ -35,7 +37,7 @@ module User
     end
 
     def validate_password(password)
-      return INVALID_PASSWORD_ERROR unless /^(?=.*[a-zA-Z])(?=.*[0-9]).{7,}$/ =~ password
+      return INVALID_PASSWORD_ERROR unless /^(?=.*[a-zA-Z])(?=.*[0-9]).{7,}$/.match?(password)
     end
 
     def validate_password_confirmation(password, password_confirmation)

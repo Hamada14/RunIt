@@ -1,3 +1,6 @@
+AllCops:
+  TargetRubyVersion: 2.4
+
 Metrics/LineLength:
   Description: Limit lines to 100 characters.
   Enabled: true
@@ -16,7 +19,7 @@ Metrics/BlockLength:
 
 RSpec/NestedGroups:
   Enabled: false
-  
+
 Rspec/ExampleLength:
   Exclude:
     - spec/**/*.rb
