@@ -21,13 +21,16 @@
 
     <div class="col-6">
 
-      <form class="round-form" action='/create_lambda' method='post'>
+      <form class="round-form" action='/lambdas' method='post'>
         <div class="col-5">
           <div class="form-group">
             <label for="lambdaName">Lambda Name</label>
             <input type="" class="form-control" name="lambdaName" placeholder="Enter lambda name" pattern="[a-zA-Z][a-zA-Z0-9]{7,20}" required title="8 to 21 alphanumeric name starting with a letter">
           </div>
+          <%= print_error(errors, 'lambdaName') %>
+
         </div>
+
 
         <div class="form-group">
           <div class="col-5">

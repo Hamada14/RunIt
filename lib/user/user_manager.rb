@@ -32,5 +32,9 @@ module User
       password_hash = password_encryptor.new(user[:password])
       return INVALID_LOGIN_ERROR unless password_hash == params[:password]
     end
+
+    def get_id(email)
+      user_model.find_by(email: email)[:id]
+    end
   end
 end

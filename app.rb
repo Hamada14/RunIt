@@ -6,9 +6,10 @@ require 'model/user'
 require 'securerandom'
 require 'sinatra'
 require 'sinatra/activerecord'
-require 'user/error_helpers'
+require 'error_helpers'
 require 'user/registration_validator'
 require 'user/user_manager'
+require 'lambda/creation_validator'
 
 # Main class running the application and handling DSL routing.
 class RunIt < Sinatra::Application
@@ -40,7 +41,19 @@ class RunIt < Sinatra::Application
         locals:
         {
           first_name: session[:first_name],
-          lambdas: lambda_manager.get_lambdas(session[:email])
+          lambdas: lambda_manager.get_lambdas(session[:email]),
+          errors: nil
+        }
+  end
+
+  post '/lambdas' do
+    errors = lambda_manager.create_lambda(params, session[:user_id])
+    erb :lambdas,
+        locals:
+        {
+          first_name: session[:first_name],
+          lambdas: lambda_manager.get_lambdas(session[:email]),
+          errors: errors
         }
   end
 
@@ -59,7 +72,9 @@ class RunIt < Sinatra::Application
     error = user_manager.login(params)
     if error.nil?
       session[:email] = params[:email]
-      session[:first_name] = Model::User.find_by(email: params[:email])[:first_name]
+      user = Model::User.find_by(email: params[:email])
+      session[:first_name] = user[:first_name]
+      session[:user_id] = user[:id]
       session.options[:expire_after] = THIRTY_DAYS_TO_SECONDS unless params['remember_me'].nil?
       redirect '/'
     else
@@ -74,6 +89,8 @@ class RunIt < Sinatra::Application
 
   get '/logout' do
     session[:email] = nil
+    session[:first_name] = nil
+    session[:user_id] = nil
     redirect '/'
   end
 
@@ -92,7 +109,8 @@ class RunIt < Sinatra::Application
     errors = user_manager.register(params)
     if errors.empty?
       session[:email] = params[:email]
-      session[:firstName] = params[:first_name]
+      session[:first_name] = params[:firstName]
+      session[:user_id] = user_manager.get_id(params[:email])
       redirect '/'
     end
     erb :register,
@@ -120,6 +138,10 @@ class RunIt < Sinatra::Application
   end
 
   def lambda_manager
-    @lambda_manager ||= Lambda::LambdaManager.new(Model::Lambda)
+    @lambda_manager ||= Lambda::LambdaManager
+                        .new(
+                          Model::Lambda,
+                          Lambda::CreationValidator.new(Model::Lambda)
+                        )
   end
 end
