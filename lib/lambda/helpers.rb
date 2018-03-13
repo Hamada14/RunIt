@@ -11,6 +11,7 @@ module Lambda
           <td>#{lambda[:name]}</td>
           <td>#{lambda[:last_triggered] || 'N/A'}</td>
           <td>#{lambda[:created_at]}</td>
+          <td></td>
         </tr>
       HEREDOC
     end
