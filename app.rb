@@ -12,6 +12,7 @@ require 'error_helpers'
 require 'user/registration_validator'
 require 'user/user_manager'
 require 'lambda/creation_validator'
+require 'json'
 
 # Main class running the application and handling DSL routing.
 class RunIt < Sinatra::Application # rubocop:disable Metrics/ClassLength
@@ -50,13 +51,10 @@ class RunIt < Sinatra::Application # rubocop:disable Metrics/ClassLength
 
   post '/lambdas' do
     errors = lambda_manager.create_lambda(params, session[:user_id])
-    erb :lambdas,
-        locals:
-        {
-          first_name: session[:first_name],
-          lambdas: lambda_manager.get_lambdas(session[:email]),
-          errors: errors
-        }
+    {
+      success: errors.empty?,
+      errors: errors
+    }.to_json
   end
 
   get '/login' do

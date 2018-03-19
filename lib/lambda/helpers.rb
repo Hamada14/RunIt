@@ -10,7 +10,7 @@ module Lambda
         <tr>
           <td>#{lambda[:name]}</td>
           <td>#{lambda[:last_triggered] || 'N/A'}</td>
-          <td>#{lambda[:created_at]}</td>
+          <td>#{lambda[:created_at].strftime '%Y-%m-%d'}</td>
           <td></td>
         </tr>
       HEREDOC

@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-4">
-      <table class="table round-form">
+      <table id="lambda-table" class="table round-form">
         <thead class="thead-dark">
           <tr>
             <th>Lambda Name</th>
@@ -22,11 +22,11 @@
 
     <div class="col-6">
 
-      <form class="round-form" action='/lambdas' method='post'>
+      <form class="round-form lambda-create-form">
         <div class="col-5">
           <div class="form-group">
             <label for="lambdaName">Lambda Name</label>
-            <input type="" class="form-control" name="lambdaName" placeholder="Enter lambda name" pattern="[a-zA-Z][a-zA-Z0-9]{7,20}" required title="8 to 21 alphanumeric name starting with a letter">
+            <input type="" class="form-control" id="lambdaNameInput" name="lambdaName" placeholder="Enter lambda name" pattern="[a-zA-Z][a-zA-Z0-9]{7,20}" required title="8 to 21 alphanumeric name starting with a letter">
           </div>
           <%= print_error(errors, 'lambdaName') %>
 
@@ -39,13 +39,15 @@
           </div>
 
           <div class="col-10">
-            <textarea class="form-control" name="lambdaCode" rows="10" cols="50" required></textarea>
+            <textarea class="form-control" id="lambdaCodeInput" name="lambdaCode" rows="10" cols="50" required></textarea>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="margin-left:30%">Create Lambda</button>
+        <button type="submit" class="btn btn-primary lambda-create" style="margin-left:30%">Create Lambda</button>
       </form>
 
     </div>
   </div>
 </div>
+
+<script src="js/lambda.js"></script>
