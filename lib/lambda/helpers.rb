@@ -7,11 +7,13 @@ module Lambda
   module Helpers
     def lambda_to_html_row(lambda)
       <<~HEREDOC
-        <tr>
+        <tr id="#{lambda[:name]}">
           <td>#{lambda[:name]}</td>
           <td>#{lambda[:last_triggered] || 'N/A'}</td>
           <td>#{lambda[:created_at].strftime '%Y-%m-%d'}</td>
-          <td></td>
+          <td>
+            <i class="fas fa-trash-alt" onclick="deleteLambda('#{lambda[:name]}')"></i>
+          </td>
         </tr>
       HEREDOC
     end

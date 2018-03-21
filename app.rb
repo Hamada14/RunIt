@@ -50,7 +50,19 @@ class RunIt < Sinatra::Application # rubocop:disable Metrics/ClassLength
   end
 
   post '/lambdas' do
+    redirect '/login' unless login?
+
     errors = lambda_manager.create_lambda(params, session[:user_id])
+    {
+      success: errors.empty?,
+      errors: errors
+    }.to_json
+  end
+
+  post '/lambdas/delete' do
+    redirect '/login' unless login?
+
+    errors = lambda_manager.delete_lambda(params['lambdaName'], session[:user_id])
     {
       success: errors.empty?,
       errors: errors
