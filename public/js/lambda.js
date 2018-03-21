@@ -16,12 +16,31 @@ $("form.lambda-create-form").submit(function(e) {
     });
 });
 
+function deleteLambda(lambda_name) {
+    $.post('/lambdas/delete', {
+        lambdaName: lambda_name,
+      },
+      function(data, status) {
+        result = JSON.parse(data);
+        if (result['success']) {
+          removeRow(lambda_name);
+        } else {
+          alert("Please don't mess with us.");
+        }
+      });
+}
+
+function removeRow(lambdaName) {
+    $('#' + lambdaName).fadeOut(500);
+}
+
 function addRowForInput(name, time) {
-  var row = $('<tr>');
+  var row = $('<tr id='+ name + '>');
   row.append($('<td>').html(name));
   row.append($('<td>').html('N/A'));
   row.append($('<td>').html(time));
-  row.append($('<td>').html(''));
+  var removeGlph = "<i class=\"fas fa-trash-alt\" onclick=\"deleteLambda(\'" + name + "\')\"></i>";
+  row.append($('<td>').html(removeGlph));
   $('#lambda-table').append(row);
 };
 
