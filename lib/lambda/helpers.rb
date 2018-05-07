@@ -13,6 +13,7 @@ module Lambda
           <td>#{lambda[:created_at].strftime '%Y-%m-%d'}</td>
           <td>
             <i class="fas fa-trash-alt" onclick="deleteLambda('#{lambda[:name]}')"></i>
+            <i class="fas fa-play" onclick="executeLambda('#{lambda[:name]}')"></i>
           </td>
         </tr>
       HEREDOC

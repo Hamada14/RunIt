@@ -30,6 +30,18 @@ function deleteLambda(lambda_name) {
       });
 }
 
+function executeLambda(lambda_name) {
+    $.get('/lambdas/execute', {
+        lambdaName: lambda_name,
+      },
+      function(data, status) {
+        result = JSON.parse(data);
+        document.getElementById("lambdaOutputTitle").innerHTML = "Output for " + lambda_name;
+        document.getElementById("lambdaOutputDetail").innerHTML = result.replace("\n", "<br/>");
+        $("#lambdaOutput").modal();
+      });
+}
+
 function removeRow(lambdaName) {
     $('#' + lambdaName).fadeOut(500);
 }
@@ -40,7 +52,9 @@ function addRowForInput(name, time) {
   row.append($('<td>').html('N/A'));
   row.append($('<td>').html(time));
   var removeGlph = "<i class=\"fas fa-trash-alt\" onclick=\"deleteLambda(\'" + name + "\')\"></i>";
+  var executeGlph = "<i class=\"fas fa-play\" onclick=\"executeLambda(\'" + name + "\')\"></i>";
   row.append($('<td>').html(removeGlph));
+  row.append($('<td>').html(executeGlph));
   $('#lambda-table').append(row);
 };
 
