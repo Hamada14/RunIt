@@ -41,3 +41,7 @@ gem 'bcrypt', '~> 3.1'
 # used as an alternative to the complex reloading logic provided by web frameworks or in
 # environments that don't support application reloading.
 gem 'shotgun'
+
+# This gem aims at being a simple and reliable solution for controlling external programs running
+# in the background on any Ruby / OS combination.
+gem 'childprocess', '~> 0.5.9'

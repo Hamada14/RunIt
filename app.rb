@@ -1,26 +1,28 @@
 # frozen_string_literal: true
 
 require 'bcrypt'
+require 'error_helpers'
+require 'json'
+require 'lambda/code_runner'
+require 'lambda/creation_validator'
 require 'lambda/helpers'
 require 'lambda/lambda_manager'
+require 'lambda/sandboxer'
 require 'model/lambda'
 require 'model/user'
 require 'securerandom'
 require 'sinatra'
 require 'sinatra/activerecord'
-require 'error_helpers'
 require 'user/registration_validator'
 require 'user/user_manager'
-require 'lambda/creation_validator'
-require 'json'
 
 # Main class running the application and handling DSL routing.
 class RunIt < Sinatra::Application # rubocop:disable Metrics/ClassLength
   register Sinatra::ActiveRecordExtension
 
   configure do
-    set :public_folder, File.expand_path('../public', __FILE__)
-    set :views, File.expand_path('../views', __FILE__)
+    set :public_folder, File.expand_path('public', __dir__)
+    set :views, File.expand_path('views', __dir__)
     set :root, File.dirname(__FILE__)
     enable :sessions
     set :session_secret, 'Constant' || ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
@@ -35,6 +37,14 @@ class RunIt < Sinatra::Application # rubocop:disable Metrics/ClassLength
           {
             first_name: session[:first_name]
           }
+  end
+
+  get '/lambdas/execute' do
+    redirect '/login' unless login?
+    lambda_function = lambda_manager.get_lambdas(session[:email]).find do |lambda|
+      lambda[:name] == params[:lambdaName]
+    end
+    code_runner.execute_code(lambda_function[:code]).to_json
   end
 
   get '/lambdas' do
@@ -155,5 +165,9 @@ class RunIt < Sinatra::Application # rubocop:disable Metrics/ClassLength
                           Model::Lambda,
                           Lambda::CreationValidator.new(Model::Lambda)
                         )
+  end
+
+  def code_runner
+    @code_runner ||= Lambda::CodeRunner.new(Lambda::Sandboxer.new)
   end
 end
