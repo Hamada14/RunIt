@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
+require 'childprocess'
 require 'tempfile'
+
+require 'lambda/execution_output'
 
 module Lambda
   # Class responsible to execute code.
@@ -8,38 +11,43 @@ module Lambda
     attr_accessor :sandboxer, :timeout
     TEMP_FILE_NAME = 'sandboxed_temp_file.rb'
     COMPILER = 'ruby'
+    DEFAULT_TIMEOUT = 5
 
-    def initialize(sandboxer, timeout = 5)
+    def initialize(sandboxer, timeout = DEFAULT_TIMEOUT)
       @sandboxer = sandboxer
       @timeout = timeout
     end
 
-    def execute_code(code, input) # rubocop:disable MethodLength
+    def execute_code(code, input = nil) # rubocop:disable MethodLength, AbcSize
       sandboxed_code = sandboxer.sandbox_code(code)
       temp_file = create_tempfile(sandboxed_code)
       read_io, write_io = IO.pipe
       write_io.write(input)
       execution_output = ExecutionOutput.new
       begin
-        run_process(temp_file, read_io, write_io)
+        run_process(temp_file, write_io, input = nil)
       rescue ChildProcess::TimeoutError => e
         execution_output.add_exception(e)
       end
-      temp_file.close
+      write_io.close
       execution_output.add_output(read_io.read)
-      execution_output
+      temp_file.close
+      execution_output.output
     end
 
     private
 
-    def run_process(temp_file, write_io, read_io)
+    # Putting input to the programs isn't yet enabled.
+    def run_process(temp_file, write_io, input = nil) # rubocop:disable MethodLength
       ChildProcess.build(COMPILER, temp_file.path).tap do |process|
         process.io.stdout = write_io
         process.io.stderr = write_io
-        process.io.stdin = read_io
         process.start
         begin
           process.poll_for_exit(@timeout)
+        rescue ChildProcess::TimeoutError => e
+          process.stop # Tries harsher method
+          raise e
         end
       end
     end

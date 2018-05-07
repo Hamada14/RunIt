@@ -2,124 +2,34 @@
 
 module Lambda
   # Methods to be whitelisted.
-  module WhiteListedMethods # rubocop:disable ModuleLength
-    # rubocop:disable PercentSymbolArray
-    ALLOWED_CONSTANTS = %i[
-      :ArgumentError :Array :BasicObject :Bignum :Binding :Class :Comparable :Complex
-      :Complex::compatible :ConditionVariable :Continuation :Data :Encoding
-      :Encoding::CompatibilityError :Encoding::Converter :Encoding::ConverterNotFoundError
-      :Encoding::InvalidByteSequenceError :Encoding::UndefinedConversionError :EncodingError
-      :Enumerable :Enumerator :Enumerator::Generator :Enumerator::Lazy :Enumerator::Yielder
-      :Errno :Exception :FalseClass :Fixnum :Float :FloatDomainError :Hash :IO
-      :IO::EAGAINWaitReadable :IO::EAGAINWaitWritable :IO::EINPROGRESSWaitReadable
-      :IO::EINPROGRESSWaitWritable :IO::EWOULDBLOCKWaitReadable :IO::EWOULDBLOCKWaitWritable
-      :IO::WaitReadable :IO::WaitWritable :IOError :IndexError :Integer :Interrupt :Kernel
-      :KeyError :LoadError :LocalJumpError :Marshal :MatchData :Math :Math::DomainError
-      :Method :Module :Mutex :NameError :NilClass :NoMemoryError :NoMethodError
-      :NotImplementedError :Numeric :Object :ObjectSpace :ObjectSpace::WeakMap :Proc
-      :Queue :Random :Range :RangeError :Rational :Rational::compatible :Regexp :RegexpError
-      :RuntimeError :ScriptError :SecurityError :SizedQueue :StandardError :StopIteration
-      :String :Struct :Symbol :SyntaxError :SystemCallError :SystemExit :SystemStackError
-      :TimeTracePoint :TrueClass :TypeError :UnboundMethod :ZeroDivisionError :fatal :unknown
-    ].freeze
-    # rubocop:enable PercentSymbolArray
-
-    KERNEL_SINGLETON_METHODS = %w[
-      Array
-      binding
-      block_given?
-      catch
-      chomp
-      chomp!
-      chop
-      chop!
-      eval
-      fail
-      Float
-      format
-      global_variables
-      gsub
-      gsub!
-      Integer
-      iterator?
-      lambda
-      local_variables
-      loop
-      method_missing
-      proc
-      raise
-      scan
-      split
-      sprintf
-      String
-      sub
-      sub!
-      throw
+  module WhiteListedMethods
+    # rubocop:disable SymbolArray
+    ALLOWED_CONSTANTS = [
+      :ArgumentError, :Array, :BasicObject, :Bignum, :Binding, :Class, :Comparable, :Complex,
+      :ConditionVariable, :Continuation, :Data, :Encoding, :EncodingError,
+      :Enumerable, :Enumerator, :Errno, :Exception, :FalseClass, :Fixnum, :Float, :FloatDomainError,
+      :Hash, :IO, :IOError, :IndexError, :Integer, :Interrupt, :Kernel, :KeyError, :LoadError,
+      :LocalJumpError, :Marshal, :MatchData, :Math, :Method, :Module, :Mutex, :NameError, :NilClass,
+      :NoMemoryError, :NoMethodError, :NotImplementedError, :Numeric, :Object, :ObjectSpace, :Proc,
+      :Queue, :Random, :Range, :RangeError, :RegexpError, :RuntimeError, :RUBY_VERSION,
+      :RUBY_RELEASE_DATE, :RUBY_PLATFORM, :RUBY_PATCHLEVEL, :RUBY_REVISION, :RUBY_DESCRIPTION,
+      :RUBY_COPYRIGHT, :RUBY_ENGINE, :RUBYGEMS_ACTIVATION_MONITOR, :ScriptError,
+      :SecurityError, :SizedQueue, :StandardError, :StopIteration, :String, :Struct, :Symbol,
+      :SyntaxError, :SystemCallError, :SystemExit, :SystemStackError, :TimeTracePoint, :TrueClass,
+      :TypeError, :UnboundMethod, :ZeroDivisionError, :fatal, :unknown, :FrozenError, :Warning,
+      :NIL, :StringIO, :STDIN, :STDOUT, :STDERR, :UncaughtThrowError, :TRUE, :FALSE, :ARGF,
+      :Monitor, :Rational, :Gem, :DidYouMean, :Regexp, :TracePoint, :RUBY_ENGINE_VERSION,
+      :TOPLEVEL_BINDING, :ClosedQueueError, :Time, :EOFError, :UnicodeNormalize, :RbConfig,
+      :SignalException, :Signal
     ].freeze
 
-    KERNEL_METHODS = %w[
-      ==
-      binding
-      block_given?
-      catch
-      chomp
-      chomp!
-      chop
-      chop!
-      clone
-      dup
-      eql?
-      equal?
-      eval
-      fail
-      format
-      freeze
-      frozen?
-      global_variables
-      gsub
-      gsub!
-      hash
-      id
-      initialize_copy
-      inspect
-      instance_eval
-      instance_of?
-      instance_variables
-      instance_variable_get
-      instance_variable_set
-      instance_variable_defined?
-      Integer
-      is_a?
-      iterator?
-      kind_of?
-      lambda
-      local_variables
-      loop
-      methods
-      method_missing
-      nil?
-      private_methods
-      print
-      proc
-      protected_methods
-      public_methods
-      raise
-      remove_instance_variable
-      respond_to?
-      respond_to_missing?
-      scan
-      send
-      split
-      sprintf
-      String
-      sub
-      sub!
-      taint
-      tainted?
-      throw
-      to_a
-      to_s
-      type
+    KERNEL_SINGLETON_METHODS = [
+      :abort, :Array, :at_exit, :binding, :block_given?, :catch, :Complex, :eval, :exit, :exit!,
+      :fail, :Float, :format, :gets, :global_variables, :Hash, :Integer, :iterator?, :lambda,
+      :local_variables, :loop, :p, :print, :printf, :proc, :putc, :puts, :raise, :rand, :Rational,
+      :readline, :readlines, :require, :select, :set_trace_func, :sleep, :sprintf, :srand, :String,
+      :throw, :trace_var, :untrace_var, :URI, :warn
     ].freeze
+    # rubocop:enable SymbolArray
   end
 end
