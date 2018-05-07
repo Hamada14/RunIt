@@ -3,6 +3,6 @@ development:
   encoding: utf8
   database: runit
   username: root
-  password: admin
+  password: 
   host: localhost
   port: 3306
